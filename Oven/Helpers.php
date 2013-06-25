@@ -109,6 +109,7 @@ function __autoload($autoload){
 
 				return;
 			}
+			
 			//*/		
 			
 			// Found a class tree under the namespace
@@ -140,6 +141,12 @@ function __autoload($autoload){
 		}
 		else{
 
+			if( 0 === strpos($autoload, "Twig_")){
+				if( is_file($file = PATH.'Pantry/Frosting/'.str_replace(array('_', "\0"), array('/', ''), $autoload).'.php') ){
+						require_once $file;
+				}
+
+			}
 			// Not Namespaced - Should not need
 			//echo "Trying to load $autoload - Set Method Here: ". __FILE__ .":" . __LINE__."\n";
 

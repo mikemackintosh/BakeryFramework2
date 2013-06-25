@@ -62,12 +62,6 @@ $autoloader = [
 				"Bakery\CookBook" => [ "Oven/CookBook" ],
 				"Bakery\CliCookBook" => [ "Oven/CliCookBook" ],
 				"Bakery\Exceptions" => [ "Pantry/Exceptions" ],
-/*
-				"Bakery/Pantry/Networking" => [ "Bakery/Pantry/Networking" ],
-				"Bakery/Pantry/Frosting" => [ "Bakery/Pantry/Frosting" ],
-				"Bakery/Pantry/PDO" => [ "Bakery/Pantry/PDO" ],
-				"Bakery/Pantry/Patterns" => [ "Bakery/Pantry/Patterns" ],
-//*/
 			  ]; 
 
 
@@ -93,7 +87,9 @@ try{
 }
 // Found an error :o
 catch(FrameworkLoadException $e){
+
 	ErrorHandler::display($e);
+	
 }
 //*/
 
