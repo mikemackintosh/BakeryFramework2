@@ -109,13 +109,7 @@ function __autoload($autoload){
 
 				return;
 			}
-			//*/
-			//
-			
-			// Remove bakery from Namespace
-			if( substr_count($namespace, "/") >= 2){
-				$namespace = str_replace("Bakery/", "", $namespace);
-			}
+			//*/		
 			
 			// Found a class tree under the namespace
 			if( file_exists( PATH ."/". $namespace ."/". $class ."/". $class . EXT ) ) {

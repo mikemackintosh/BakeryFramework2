@@ -29,6 +29,8 @@ class HttpRequestManager {
 		$this->r['requestor_addr'] = $_SERVER['REMOTE_ADDR'];
 		$this->r['requestor_port'] = $_SERVER['REMOTE_PORT'];
 
+		\Bakery::$response = new HttpResponseManager();
+
 	}
 
 	private function bake(){
