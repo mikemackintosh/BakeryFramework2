@@ -1,0 +1,10 @@
+<?php
+
+namespace Bakery\Oven;
+
+interface CliRecipe{
+	
+	public function help();
+
+	public function init();
+}
