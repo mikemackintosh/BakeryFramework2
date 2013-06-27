@@ -14,6 +14,8 @@ class HttpResponseManager {
 		//	'cache' => PATH.'Cache',
 		));
 
+		\Bakery::$render->addGlobal("site", [ "name" => SITE_NAME, "description" => "" ]);
+
 	}
 
 	public function render( $file, $args ){
