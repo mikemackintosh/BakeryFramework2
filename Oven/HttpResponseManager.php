@@ -2,13 +2,17 @@
 
 namespace Bakery\Oven;
 
+/**
+ * 
+ */
 class HttpResponseManager {
 	
+	/**
+	 * [__construct description]
+	 */
 	public function __construct() {
 		
-		//require_once PATH.'Pantry/Frosting/Twig/Autoloader.php';
-		//\Twig_Autoloader::register();
-
+		// Create the Twig_Loader
 		$loader = new \Twig_Loader_Filesystem(PATH.'Glaze/'.THEME);
 		\Bakery::$render = new \Twig_Environment($loader, array(
 		//	'cache' => PATH.'Cache',
@@ -21,11 +25,25 @@ class HttpResponseManager {
 
 	}
 
+	/**
+	 * [render description]
+	 * 
+	 * @param  [type] $file [description]
+	 * @param  [type] $args [description]
+	 * @return [type]       [description]
+	 */
 	public function render( $file, $args ){
 		header('HTTP/1.1 200 OK');
 		header('X-Powered-By: '.$_ENV['BAKERY_LCR']);
+		
 		try{
-			echo \Bakery::$render->render( $file, $args );
+
+			// Is JSON
+			if(\Bakery::$request->json()){
+				die( json_encode( $args ) );
+			}
+
+			die( \Bakery::$render->render( $file, $args ) );
 		}
 		catch(\Exception $e){
 			$this->error( $e->getMessage() );
@@ -40,6 +58,13 @@ class HttpResponseManager {
 
 	}
 
+	/**
+	 * [error description]
+	 * 
+	 * @param  [type]  $response [description]
+	 * @param  integer $error    [description]
+	 * @return [type]            [description]
+	 */
 	public function error( $response , $error = 500){
 		echo \Bakery::$render->render( "errors/{$error}.twig", [ "error" => $response ] );
 	}

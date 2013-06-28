@@ -25,7 +25,7 @@ $_ENV['BAKERY_LCR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']} [{$_ENV['BA
 
 /* Define Site Variables */
 define('SITE_NAME', 'Bakery Framework 2');
-define('SITE_URL', '//dev.ve.zyp.io');
+define('SITE_URL', '//');
 define('THEME', 'vanilla');
 
 /* Define Environment Variables */
@@ -48,14 +48,24 @@ ${'MAINTENANCE_ADMIN'} = [ '' ];
 /* Set Default Extension */
 define('EXT', '.php');
 
+/**
+ * Debug Mode Settings
+ */
 
 if(DEBUG_MODE){
 	
 	ini_set("display_errors", true);
-	error_reporting(-1);
+	error_reporting( -1 );
 
 }
+else{
+	ini_set("display_errors", false);
+	error_reporting( 0 );
+}
 
+/**
+ * Basic autoloader
+ */
 
 $autoloader = [
 				"Bakery\Oven\Bake" => [ "Oven/Bake" ],
@@ -79,18 +89,8 @@ include(PATH."Recipe".EXT);
 
 ///*
 // Let's get baking
-try{		
 
-	\Bakery::$logging->debug("Initial Script Access", "--", "Version:", $_ENV['BAKERY_VER'], "--", "Build Date:", $_ENV['BAKERY_BUILDDATE']);
-	\Bakery::$oven = \Bakery\Oven\Bake::instance();
-
-}
-// Found an error :o
-catch(FrameworkLoadException $e){
-
-	ErrorHandler::display($e);
-
-}
-//*/
+\Bakery::$logging->debug("Initial Script Access", "--", "Version:", $_ENV['BAKERY_VER'], "--", "Build Date:", $_ENV['BAKERY_BUILDDATE']);
+\Bakery::$oven = \Bakery\Oven\Bake::instance();
 
 // Enjoy

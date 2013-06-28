@@ -2,8 +2,14 @@
 
 namespace Bakery\Pantry\Libraries\URLGenerator;
 
+/**
+ * 
+ */
 class URLGenerator{
 	
+	/**
+	 * [__construct description]
+	 */
 	public function __construct(){
 		//echo __METHOD__;
 	}
