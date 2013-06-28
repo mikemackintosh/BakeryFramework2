@@ -33,6 +33,7 @@ class Bakery {
 	public static $request;
 	public static $response;
 	public static $oven;
+	public static $module;
 }
 
 

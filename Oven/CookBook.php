@@ -86,6 +86,10 @@ class CookBook {
 		$this->_routeName = $name;
 	}
 
+	public function getRouteName(){
+		return $this->_routeName;
+	}
+
 
 
 }
