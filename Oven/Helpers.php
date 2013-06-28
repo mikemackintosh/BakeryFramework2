@@ -111,7 +111,6 @@ function __autoload($autoload){
 			}
 			
 			//*/		
-			
 			// Found a class tree under the namespace
 			if( file_exists( PATH ."/". $namespace ."/". $class ."/". $class . EXT ) ) {
 				
@@ -132,9 +131,8 @@ function __autoload($autoload){
 			}
 			// Could not find the file
 			else{
-				echo $namespace;
 				
-				throw new \Bakery\Exceptions\AutoloaderFileNotFound("AutoLoad Error: Unable to autoload `$autoload`");
+				throw new \Bakery\Exceptions\AutoloaderFileNotFound("AutoLoad Error: Unable to autoload `{$autoload}`");
 
 			}
 
@@ -143,7 +141,7 @@ function __autoload($autoload){
 
 			if( 0 === strpos($autoload, "Twig_")){
 				if( is_file($file = PATH.'Pantry/Frosting/'.str_replace(array('_', "\0"), array('/', ''), $autoload).'.php') ){
-						require_once $file;
+					require_once $file;
 				}
 
 			}
@@ -155,7 +153,7 @@ function __autoload($autoload){
 	}
 	catch(\Exception $e){
 		//ErrorHandler
-		//echo $e->getMessage();
+		echo $e->getMessage();
 	}
 	finally{
 		// Just because it's included in PHP5.5.0

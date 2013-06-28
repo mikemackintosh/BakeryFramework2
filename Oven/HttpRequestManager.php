@@ -70,7 +70,7 @@ class HttpRequestManager {
 						array_shift($matches);
 						$matches = b_filter("numeric_keys", $matches);
 					}
-					
+
 					if(!is_null($recipe->func)){
 						$rc = (new \ReflectionMethod($recipe->controller, $recipe->func));
 
@@ -111,12 +111,12 @@ class HttpRequestManager {
 			}
 
 			if($_attemptedRoutes == sizeof(\Bakery::$cookbook)){
-				throw new \Exception("Error404");
+				throw new \Exception( $this->r['uri'] );
 			}
 
 		}
 		catch(\Exception $e){
-			//echo $e->getMessage();
+			\Bakery::$response->error( $e->getMessage(), 404 );
 		}
 		
 

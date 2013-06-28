@@ -14,15 +14,22 @@ class HttpResponseManager {
 		//	'cache' => PATH.'Cache',
 		));
 
-		\Bakery::$render->addGlobal("site", [ "name" => SITE_NAME, "description" => "" ]);
+		\Bakery::$render->addGlobal("site", [ "name" => SITE_NAME, "description" => "", 'bf2_ver' => $_ENV['BAKERY_VER'], 'bf2_sn' => $_ENV['BAKERY_SN'] ]);
+		\Bakery::$render->addGlobal('vanilla', [ 'stylesheet' => '/assets/style.css'] );
+
+		//\Bakery::$render->addGlobal("vanilla", [ "stylesheet"  ]);
 
 	}
 
 	public function render( $file, $args ){
 		header('HTTP/1.1 200 OK');
 		header('X-Powered-By: '.$_ENV['BAKERY_LCR']);
-
-		echo \Bakery::$render->render( $file, $args );
+		try{
+			echo \Bakery::$render->render( $file, $args );
+		}
+		catch(\Exception $e){
+			$this->error( $e->getMessage() );
+		}
 	}
 
 	public function image( $type = 'png' ){
@@ -33,8 +40,8 @@ class HttpResponseManager {
 
 	}
 
-	public function error( $response ){
-
+	public function error( $response , $error = 500){
+		echo \Bakery::$render->render( "errors/{$error}.twig", [ "error" => $response ] );
 	}
 
 }

@@ -17,14 +17,14 @@ $_ENV['BAKERY_SESSION_INSTNC'] = md5($_ENV['BAKERY_STARTTIME']);
 $_ENV['BAKERY_VISITTIME'] = $_SERVER['REQUEST_TIME'];
 
 /* Create Environment */
-$_ENV['BAKERY_VER'] = '2.0.2'; 						// Build Version 
-$_ENV['BAKERY_BUILDDATE'] = "20130621";			 	// Build Date
-$_ENV['BAKERY_LN'] = "Bagel"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
+$_ENV['BAKERY_VER'] = '2.0.0'; 						// Build Version 
+$_ENV['BAKERY_BUILDDATE'] = "20130626";			 	// Build Date
+$_ENV['BAKERY_SN'] = "Bagel"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
 $_ENV['BAKERY_CR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']}";
-$_ENV['BAKERY_LCR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']} [{$_ENV['BAKERY_LN']}]";
+$_ENV['BAKERY_LCR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']} [{$_ENV['BAKERY_SN']}]";
 
 /* Define Site Variables */
-define('SITE_NAME', 'Zyp.io');
+define('SITE_NAME', 'Bakery Framework 2');
 define('SITE_URL', '//dev.ve.zyp.io');
 define('THEME', 'vanilla');
 
@@ -89,7 +89,7 @@ try{
 catch(FrameworkLoadException $e){
 
 	ErrorHandler::display($e);
-	
+
 }
 //*/
 
