@@ -44,16 +44,28 @@ class HttpResponseManager {
 			}
 
 			die( \Bakery::$render->render( $file, $args ) );
+
 		}
 		catch(\Exception $e){
 			$this->error( $e->getMessage() );
 		}
 	}
 
+	/**
+	 * [image description]
+	 * 
+	 * @param  string $type [description]
+	 * @return [type]       [description]
+	 */
 	public function image( $type = 'png' ){
 
 	}
 
+	/**
+	 * [pdf description]
+	 * 
+	 * @return [type] [description]
+	 */
 	public function pdf(){
 
 	}
