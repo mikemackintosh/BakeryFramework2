@@ -33,10 +33,7 @@ BakeryFramework2 is a formalized version of the original [Bakery Framework](http
 ##2. Requirements
 
 **Required**
-* PHP5.4
-
-**Suggested:**
-* Composer (http://getcomposer.org)
+* PHP5.5
 
 ##3. Usage
 
