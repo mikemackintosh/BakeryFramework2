@@ -15,11 +15,18 @@ class HttpRequestManager {
 
 		$this->r['method'] = $_SERVER['REQUEST_METHOD'];
 		$this->r['host'] = $_SERVER['HTTP_HOST'];
-		$this->r['content_length'] = $_SERVER['CONTENT_LENGTH'];
-		$this->r['content_type'] = $_SERVER['CONTENT_TYPE'];
 
-		$this->r['https'] = ($_SERVER['HTTPS'] ? true : false);
-		
+		if(array_key_exists("CONTENT_LENGTH", $_SERVER)){
+			$this->r['content_length'] = $_SERVER['CONTENT_LENGTH'];
+		}
+
+		if(array_key_exists("CONTENT_TYPE", $_SERVER)){
+			$this->r['content_type'] = $_SERVER['CONTENT_TYPE'];
+		}
+
+		if(array_key_exists("https", $_SERVER)){
+			$this->r['https'] = ($_SERVER['HTTPS'] ? true : false);
+		}
 
 		$this->r['json'] = (strstr($_SERVER['REQUEST_URI'], ".json") ? true : false);
 

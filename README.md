@@ -2,7 +2,7 @@ BakeryFramework2
 ================================
 
 ##Synopsis: 
-BakeryFramework2 - The most minimalist, simplistic and extensible framework for PHP5.4
+BakeryFramework2 - The most minimalist, simplistic and extensible framework for PHP5.5
 
 ##Table of Contents
 
