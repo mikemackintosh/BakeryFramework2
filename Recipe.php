@@ -17,6 +17,12 @@
 	->bind('changelog');
 
 
+// Create recipe for changelog
+(new \Bakery\CookBook("/git", "\Bakery\Recipes\BakeryFramework2\Welcome", "git"))
+	->type("GET")
+	->bind('GIT');
+
+
 /********************************
  *
  *    
