@@ -140,12 +140,24 @@ function __autoload($autoload){
 		}
 		else{
 
+			// Autoload Twig
 			if( 0 === strpos($autoload, "Twig_")){
+				
 				if( is_file($file = PATH.'Pantry/Frosting/'.str_replace(array('_', "\0"), array('/', ''), $autoload).'.php') ){
 					require_once $file;
 				}
 
+			}		
+			// Autoload LESS	
+			else if( 0 === strpos($autoload, "lessc")){
+
+				if( is_file($file = PATH.'Pantry/Frosting/Less/lessc.inc.php') ){
+					require_once $file;
+				}
+
 			}
+
+
 			// Not Namespaced - Should not need
 			//echo "Trying to load $autoload - Set Method Here: ". __FILE__ .":" . __LINE__."\n";
 
@@ -161,6 +173,34 @@ function __autoload($autoload){
 	}
 
 }
+
+/**
+ * [$isError description]
+ * 
+ * @var boolean
+ */
+register_shutdown_function('shutdownHandler');
+//set_error_handler("errorHandler");
+
+function shutdownHandler() {
+    if ($error = error_get_last()){
+	    switch($error['type']){
+	        case E_ERROR:
+	        case E_CORE_ERROR:
+	        case E_COMPILE_ERROR:
+	        case E_USER_ERROR:
+	    	case E_RECOVERABLE_ERROR:
+	    	case E_CORE_WARNING:
+	    	case E_COMPILE_WARNING:
+	    	case E_PARSE:            
+	       	 var_dump ($error);//do whatever you need with it
+	            break;
+	    }
+
+    }
+
+};
+
 
 /**
  * [redirect description]

@@ -2,17 +2,26 @@
 
 namespace Bakery\Oven;
 
+/**
+ * 
+ */
 class HttpRequestManager {
 	
 	private $r = [];
 
+	/**
+	 * [__construct description]
+	 */
 	public function __construct( ) {
 
+		//
 		$this->r['uri'] = urldecode($_SERVER['REQUEST_URI']);
 		$this->r['uri_parts'] = explode("/", $this->r['uri']);
 
+		// 
 		array_shift($this->r['uri_parts']);
 
+		// 
 		$this->r['method'] = $_SERVER['REQUEST_METHOD'];
 		$this->r['host'] = $_SERVER['HTTP_HOST'];
 
@@ -28,21 +37,67 @@ class HttpRequestManager {
 			$this->r['https'] = ($_SERVER['HTTPS'] ? true : false);
 		}
 
+		// Detect JSON
 		$this->r['json'] = (strstr($_SERVER['REQUEST_URI'], ".json") ? true : false);
 
+		// Detect Stylesheet
+		$this->r['stylesheet'] = (strstr($_SERVER['REQUEST_URI'], ".css") ? true : false);
+
+		// Detect LESS
+		$this->r['less'] = (strstr($_SERVER['REQUEST_URI'], ".less") ? true : false);
+
+		// Detect LESS
+		$this->r['image'] = ((stristr($_SERVER['REQUEST_URI'], ".png") 
+							|| stristr($_SERVER['REQUEST_URI'], ".jpg")
+							|| stristr($_SERVER['REQUEST_URI'], ".jpeg") 
+							|| stristr($_SERVER['REQUEST_URI'], ".svg") 
+							|| stristr($_SERVER['REQUEST_URI'], ".gif")
+							) ? true : false);
+
+		// Server Details
 		$this->r['server_addr'] = $_SERVER['SERVER_ADDR'];
 		$this->r['server_port'] = $_SERVER['SERVER_PORT'];
 
+		// Remote details
 		$this->r['requestor_addr'] = $_SERVER['REMOTE_ADDR'];
 		$this->r['requestor_port'] = $_SERVER['REMOTE_PORT'];
 
+		// 
 		\Bakery::$response = new HttpResponseManager();
 
 	}
 
+	/**
+	 * [bake description]
+	 * 
+	 * @return [type] [description]
+	 */
 	private function bake(){
 
 		try{
+
+			// Handle Stylesheets and Images
+			if($this->r['stylesheet'] || $this->r['image']){
+
+				if( file_exists( PATH."Glaze/".THEME.$this->r['uri'])) {
+					
+					echo file_get_contents( PATH."Glaze/".THEME.$this->r['uri'] );
+					
+					die();
+
+				}
+
+			}
+			// Autoconvert LESS
+			else if($this->r['less']){
+				
+				$less = new \lessc();
+				
+				echo $less->compileFile( PATH."Glaze/".THEME.$this->r['uri'] );
+				
+				die();
+
+			}
 
 			// Handles iterations for 404 count
 			$_attemptedRoutes = 0;
@@ -129,6 +184,13 @@ class HttpRequestManager {
 
 	}
 
+	/**
+	 * [__call description]
+	 * 
+	 * @param  [type] $k [description]
+	 * @param  [type] $v [description]
+	 * @return [type]    [description]
+	 */
 	public function __call($k, $v){
 
 		if( empty( $v ) ){
@@ -142,10 +204,25 @@ class HttpRequestManager {
 
 	}
 
+	/**
+	 * [__toString description]
+	 * 
+	 * @return string [description]
+	 */
 	public function __toString(){
 		return $this->r['uri'];
 	}
 
+	/**
+	 * [mixVars description]
+	 * 
+	 * @param  [type] $rc      [description]
+	 * @param  [type] $recipe  [description]
+	 * @param  [type] $args    [description]
+	 * @param  [type] $matches [description]
+	 * 
+	 * @return [type]          [description]
+	 */
 	public function mixVars( $rc, $recipe, $args, $matches ){
 
 		foreach( $rc->getParameters() as $param ){
@@ -165,10 +242,24 @@ class HttpRequestManager {
 		return $args;
 	}
 
+	/**
+	 * [get description]
+	 * 
+	 * @param  [type] $var [description]
+	 * 
+	 * @return [type]      [description]
+	 */
 	public function get($var){
 		return $_GET[$var];
 	}
 
+	/**
+	 * [post description]
+	 * 
+	 * @param  [type] $var [description]
+	 * 
+	 * @return [type]      [description]
+	 */
 	public function post($var){
 		return $_POST[$var];
 	}

@@ -19,7 +19,7 @@ class HttpResponseManager {
 		));
 
 		\Bakery::$render->addGlobal("site", [ "name" => SITE_NAME, "description" => "", 'bf2_ver' => $_ENV['BAKERY_VER'], 'bf2_sn' => $_ENV['BAKERY_SN'] ]);
-		\Bakery::$render->addGlobal('vanilla', [ 'stylesheet' => '/assets/style.css'] );
+		//\Bakery::$render->addGlobal('vanilla', [ 'stylesheet' => '/assets/style.css'] );
 
 		//\Bakery::$render->addGlobal("vanilla", [ "stylesheet"  ]);
 
