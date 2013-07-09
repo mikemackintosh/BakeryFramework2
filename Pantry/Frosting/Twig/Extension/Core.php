@@ -192,6 +192,10 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_SimpleFunction('random', 'twig_random', array('needs_environment' => true)),
             new Twig_SimpleFunction('date', 'twig_date_converter', array('needs_environment' => true)),
             new Twig_SimpleFunction('include', 'twig_include', array('needs_environment' => true, 'needs_context' => true, 'is_safe' => array('all'))),
+            new Twig_SimpleFunction('style', 'bf2_style'),
+            new Twig_SimpleFunction('image', 'bf2_image'),
+            new Twig_SimpleFunction('less', 'bf2_less'),
+            new Twig_SimpleFunction('asset', 'bf2_asset'),
         );
     }
 
@@ -1305,6 +1309,59 @@ function twig_include(Twig_Environment $env, $context, $template, $variables = a
     if ($isSandboxed && !$alreadySandboxed) {
         $sandbox->disableSandbox();
     }
+
+}
+
+/**
+ * Provides the ability to get constants from instances as well as class/global constants.
+ *
+ * @param string      $constant The name of the constant
+ * @param null|object $object   The object to get the constant from
+ *
+ * @return string
+ */
+function bf2_style($stylename, $dir = NULL)
+{  
+
+    return "/assets/css/$dir/$stylename";
+
+}
+
+function bf2_less($less, $dir = NULL)
+{
+
+    return "/assets/less/$dir/$less";
+
+}
+
+/**
+ * Provides the ability to get constants from instances as well as class/global constants.
+ *
+ * @param string      $constant The name of the constant
+ * @param null|object $object   The object to get the constant from
+ *
+ * @return string
+ */
+function bf2_image($image, $dir = NULL)
+{
+
+    return "/assets/image/$dir/$image";
+
+}
+
+
+/**
+ * Provides the ability to get constants from instances as well as class/global constants.
+ *
+ * @param string      $constant The name of the constant
+ * @param null|object $object   The object to get the constant from
+ *
+ * @return string
+ */
+function bf2_asset($asset, $file, $dir = NULL)
+{
+ 
+    return "/assets/$asset/$dir/$file";
 }
 
 /**

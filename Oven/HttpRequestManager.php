@@ -78,10 +78,23 @@ class HttpRequestManager {
 
 			// Handle Stylesheets and Images
 			if($this->r['stylesheet'] || $this->r['image']){
+				
+				$asset = PATH."Glaze/".THEME.$this->r['uri'];
 
-				if( file_exists( PATH."Glaze/".THEME.$this->r['uri'])) {
+				if( file_exists( $asset )) {
 					
-					echo file_get_contents( PATH."Glaze/".THEME.$this->r['uri'] );
+					if($this->r['stylesheet']){
+						
+						header("Content-type: text/css", true);
+
+					}
+					else{
+						
+						header("Content-type: ".image_type_to_mime_type( exif_imagetype( $asset ) ), true);
+
+					}
+
+					echo file_get_contents( $asset );
 					
 					die();
 
@@ -90,7 +103,9 @@ class HttpRequestManager {
 			}
 			// Autoconvert LESS
 			else if($this->r['less']){
-				
+
+				header("Content-type: text/css", true);
+
 				$less = new \lessc();
 				
 				echo $less->compileFile( PATH."Glaze/".THEME.$this->r['uri'] );
