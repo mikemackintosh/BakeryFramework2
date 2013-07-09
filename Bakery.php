@@ -33,10 +33,10 @@ define('PATH', dirname(__FILE__).'/');
 define('BAKERY_PATH', dirname(__FILE__)."/Bakery/");
 
 /* Set Logging Mode */
-define('LOGGING_MODE', true);
+define('LOGGING_MODE', false);
 
 /* Set Debug Mode */
-define('DEBUG_MODE', true);
+define('DEBUG_MODE', false);
 
 /* Set Maintainer Mode and Owner */
 define('MAINTENANCE_MODE', false);

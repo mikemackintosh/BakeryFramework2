@@ -60,11 +60,14 @@ class Welcome {
 
 		$changes = [
 				"2.0.1" => [
-					"date" => "",
+					"date" => "20130709",
 					"commits" => [
 						
-						"59de92c" => [
-										"Off-loaded response and Twig rendering modules from core",
+						"292d206" => [
+										"Added Lessc library to HttpRequestManager",
+									],
+						"c6812ef" => [
+										"Added style, less, image and asset twig functions"
 									],
 					]
 				],
