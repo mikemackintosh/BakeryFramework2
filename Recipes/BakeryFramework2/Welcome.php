@@ -110,5 +110,9 @@ class Welcome {
 
 	}
 
+	public function git(){
+		header("Location: http://bit.ly/gitgitbakeryphp");
+	}
+
 }
 
