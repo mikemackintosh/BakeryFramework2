@@ -59,7 +59,7 @@ class Welcome {
 	public function revisions( $revision ){
 
 		$changes = [
-				"2.0.1" => [
+				"2.0.2" => [
 					"date" => "20130709",
 					"commits" => [
 						
