@@ -17,8 +17,8 @@ $_ENV['BAKERY_SESSION_INSTNC'] = md5($_ENV['BAKERY_STARTTIME']);
 $_ENV['BAKERY_VISITTIME'] = $_SERVER['REQUEST_TIME'];
 
 /* Create Environment */
-$_ENV['BAKERY_VER'] = '2.0.2'; 						// Build Version 
-$_ENV['BAKERY_BUILDDATE'] = "20130709";			 	// Build Date
+$_ENV['BAKERY_VER'] = '2.0.3'; 						// Build Version 
+$_ENV['BAKERY_BUILDDATE'] = "20130717";			 	// Build Date
 $_ENV['BAKERY_SN'] = "Bagel"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
 $_ENV['BAKERY_CR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']}";
 $_ENV['BAKERY_LCR'] = "Powered By BakeryPHP - v{$_ENV['BAKERY_VER']} [{$_ENV['BAKERY_SN']}]";
