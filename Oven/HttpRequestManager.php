@@ -53,6 +53,9 @@ class HttpRequestManager {
 							|| stristr($_SERVER['REQUEST_URI'], ".svg") 
 							|| stristr($_SERVER['REQUEST_URI'], ".gif")
 							) ? true : false);
+		// Detect Javascript
+		$this->r['javascript'] = ((stristr($_SERVER['REQUEST_URI'], ".js") 
+							) ? true : false);
 
 		// Server Details
 		$this->r['server_addr'] = $_SERVER['SERVER_ADDR'];
@@ -77,7 +80,7 @@ class HttpRequestManager {
 		try{
 
 			// Handle Stylesheets and Images
-			if($this->r['stylesheet'] || $this->r['image']){
+			if($this->r['stylesheet'] || $this->r['image'] || $this->r['javascript']){
 				
 				$asset = PATH."Glaze/".THEME.$this->r['uri'];
 
@@ -87,6 +90,9 @@ class HttpRequestManager {
 						
 						header("Content-type: text/css", true);
 
+					}
+					elseif( $this->r['javascript'] ){
+						header("Content-type: application/javascript");
 					}
 					else{
 						
@@ -107,11 +113,9 @@ class HttpRequestManager {
 				header("Content-type: text/css", true);
 
 				$less = new \lessc();
-				
-				echo $less->compileFile( PATH."Glaze/".THEME.$this->r['uri'] );
-				
-				die();
 
+				die( $less->compileFile( str_replace("//", "/", PATH."Glaze/".THEME.$this->r['uri'] )) );
+				
 			}
 
 			// Handles iterations for 404 count

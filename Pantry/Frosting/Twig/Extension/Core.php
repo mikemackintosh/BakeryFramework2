@@ -196,6 +196,7 @@ class Twig_Extension_Core extends Twig_Extension
             new Twig_SimpleFunction('image', 'bf2_image'),
             new Twig_SimpleFunction('less', 'bf2_less'),
             new Twig_SimpleFunction('asset', 'bf2_asset'),
+            new Twig_SimpleFunction('javascript', 'bf2_javascript'),
         );
     }
 
@@ -1362,6 +1363,21 @@ function bf2_asset($asset, $file, $dir = NULL)
 {
  
     return "/assets/$asset/$dir/$file";
+}
+
+
+/**
+ * Provides the ability to get constants from instances as well as class/global constants.
+ *
+ * @param string      $constant The name of the constant
+ * @param null|object $object   The object to get the constant from
+ *
+ * @return string
+ */
+function bf2_javascript($js, $dir = NULL)
+{
+ 
+    return "/assets/js/$dir/$js";
 }
 
 /**
