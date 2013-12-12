@@ -1,0 +1,32 @@
+{
+    "name": "bakery/framework2",
+    "description": "BakeryFramework2 is an embelished RDF (Rapid Development Framework) designed for PHP5.5",
+    "keywords": ["shutterstock", "security"],
+    "homepage": "http://www.bakeryphp.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mike Mackintosh",
+            "email": "m@zyp.io"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Bakery": "src/"
+        }
+    },
+   "require": {
+        "php": ">=5.5",
+        "symfony/twig-bridge": "2.1.*",
+        "twig/twig": ">=1.8,<2.0-dev",
+        "dtr/ip": ">0",
+        "dtr/ssh": ">0.8"
+    },
+
+    "minimum-stability": "dev",
+        "extra": {
+        "branch-alias": {
+            "dev-master": "0.5.0-dev"
+        }
+    }
+}
