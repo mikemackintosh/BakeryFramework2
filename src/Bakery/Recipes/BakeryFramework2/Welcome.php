@@ -63,11 +63,11 @@ class Welcome {
 					"date" => "20131213",
 					"commits" => [
 						
-						"292d206" => [
-										"Added Lessc library to HttpRequestManager",
+						"5f1dede" => [
+										"Refactored code base in accordance with 2.1.0",
 									],
-						"c6812ef" => [
-										"Added style, less, image and asset twig functions"
+						"5f1dede" => [
+										"Updated changelog",
 									],
 					]
 				],
