@@ -19,7 +19,7 @@
         "php": ">=5.5",
         "symfony/twig-bridge": "2.1.*",
         "twig/twig": ">=1.8,<2.0-dev",
-        "dtr/ip": ">0",
+        "dtr/ip": "2.2.5.*@dev",
         "dtr/ssh": ">0.8"
     },
 
