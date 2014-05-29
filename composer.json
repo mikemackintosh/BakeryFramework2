@@ -4,6 +4,7 @@
     "keywords": ["php", "RDF", "framework", "security"],
     "homepage": "http://www.bakeryphp.com",
     "license": "MIT",
+    "version": "2.1.1",
     "authors": [
         {
             "name": "Mike Mackintosh",
@@ -19,14 +20,14 @@
         "php": ">=5.5",
         "symfony/twig-bridge": "2.1.*",
         "twig/twig": ">=1.8,<2.0-dev",
-        "dtr/ip": "2.2.5.*@dev",
+        "dtr/ip": "*@dev",
         "dtr/ssh": ">0.8"
     },
 
     "minimum-stability": "dev",
         "extra": {
         "branch-alias": {
-            "dev-master": "2.1.0-dev"
+            "dev-master": "2.1.1-dev"
         }
     }
 }
