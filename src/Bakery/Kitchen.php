@@ -19,11 +19,13 @@ $_BENV['HOSTNAME'] = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_
 $_BENV['PROTOCOL'] = ($_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://");
 
 /* Get Environment */
-foreach( $cfg->getSection('environments') as $env => $hostname){
-    if(preg_match("`$hostname`", $_BENV['HOSTNAME'] )){
+if(is_array($cfg->getSection('environments'))){
+    foreach( $cfg->getSection('environments') as $env => $hostname){
+        if(preg_match("`$hostname`", $_BENV['HOSTNAME'] )){
 
-        $_BENV['ENV'] = $env;
-        break;
+            $_BENV['ENV'] = $env;
+            break;
+        }
     }
 }
 
@@ -35,7 +37,7 @@ $_BENV['BAKERY_SESS_INST'] = md5($_BENV['BAKERY_STARTTIME']);
 $_BENV['BAKERY_VISITTIME'] = $_SERVER['REQUEST_TIME'];
 
 /* Create Environment */
-$_BENV['BAKERY_VER']       = '2.1.0'; 						// Build Version 
+$_BENV['BAKERY_VER']       = '2.1.0'; 						// Build Version
 $_BENV['BAKERY_BUILDDATE'] = "20131213";			 	        // Build Date
 $_BENV['BAKERY_SN']        = "Bagel"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
 $_BENV['BAKERY_CR']        = "Powered By BakeryPHP - v{$_BENV['BAKERY_VER']}";
