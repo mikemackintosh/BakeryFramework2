@@ -1,1 +1,3 @@
 Logs/*
+composer.lock
+vendor/
