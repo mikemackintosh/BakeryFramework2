@@ -40,13 +40,17 @@ class HttpRequestManager {
 		// Detect JSON
 		$this->r['json'] = (strstr($_SERVER['REQUEST_URI'], ".json") ? true : false);
 
+		// Detect YAML
+		$this->r['json'] = ((strstr($_SERVER['REQUEST_URI'], ".yaml") 
+							|| strstr($_SERVER['REQUEST_URI'], ".yml")) ? true : false);
+
 		// Detect Stylesheet
 		$this->r['stylesheet'] = (strstr($_SERVER['REQUEST_URI'], ".css") ? true : false);
 
 		// Detect LESS
 		$this->r['less'] = (strstr($_SERVER['REQUEST_URI'], ".less") ? true : false);
 
-		// Detect LESS
+		// Detect Image
 		$this->r['image'] = ((stristr($_SERVER['REQUEST_URI'], ".png") 
 							|| stristr($_SERVER['REQUEST_URI'], ".jpg")
 							|| stristr($_SERVER['REQUEST_URI'], ".jpeg") 
@@ -95,9 +99,7 @@ class HttpRequestManager {
 						header("Content-type: application/javascript");
 					}
 					else{
-						
 						header("Content-type: ".image_type_to_mime_type( exif_imagetype( $asset ) ), true);
-
 					}
 
 					echo file_get_contents( $asset );
