@@ -29,6 +29,7 @@ define('WEB_PATH', getcwd().'/web/');
  */
 class Bakery {
     public static $cfg;
+    public static $error;
     public static $render;
     public static $pdo;
     public static $cookbook = [];

@@ -14,7 +14,6 @@ $cfg = Config::load(TOPHAT_PATH."/configs/app.cfg");
 \Bakery::$cfg = &$cfg;
 
 /* Set Envinronment */
-$env = 'prod';
 $_BENV['HOSTNAME'] = (isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : $_SERVER['HTTP_HOST']);
 $_BENV['PROTOCOL'] = ($_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://");
 
@@ -22,11 +21,13 @@ $_BENV['PROTOCOL'] = ($_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://");
 if(is_array($cfg->getSection('environments'))){
     foreach( $cfg->getSection('environments') as $env => $hostname){
         if(preg_match("`$hostname`", $_BENV['HOSTNAME'] )){
-
             $_BENV['ENV'] = $env;
             break;
         }
     }
+}
+else{
+    $_BENV['ENV'] = 'production'; 
 }
 
 
@@ -37,9 +38,9 @@ $_BENV['BAKERY_SESS_INST'] = md5($_BENV['BAKERY_STARTTIME']);
 $_BENV['BAKERY_VISITTIME'] = $_SERVER['REQUEST_TIME'];
 
 /* Create Environment */
-$_BENV['BAKERY_VER']       = '2.1.0'; 						// Build Version
-$_BENV['BAKERY_BUILDDATE'] = "20131213";			 	        // Build Date
-$_BENV['BAKERY_SN']        = "Bagel"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
+$_BENV['BAKERY_VER']       = '2.2.0'; 						// Build Version
+$_BENV['BAKERY_BUILDDATE'] = "20140817";			 	        // Build Date
+$_BENV['BAKERY_SN']        = "Brownie"; 						// Logical Name - Bagel, Brownie, Cheesecake, Cookie, Cupcake, Danish, Donut, Eclair, Fruitcake, Zeppoli
 $_BENV['BAKERY_CR']        = "Powered By BakeryPHP - v{$_BENV['BAKERY_VER']}";
 $_BENV['BAKERY_LCR']       = "Powered By BakeryPHP - v{$_BENV['BAKERY_VER']} [{$_BENV['BAKERY_SN']}]";
 
@@ -82,13 +83,17 @@ if(DEBUG_MODE){
 
 /** Listen for Maintenace Mode */
 if(MAINTENANCE_MODE && $_SERVER['REMOTE_ADDR'] != MAINTENANCE_ADMIN){
-	ErrorHandler::maintenance($e);
+	\Bakery::$error->maintenance($e);
 }
 
 /* Include Recipe.php */
 include_once(PATH."Recipe".EXT);
 
-// Let's get baking
-\Bakery::$oven = Oven\Bake::instance();
-
+try{
+    // Let's get baking
+    \Bakery::$oven = Oven\Bake::instance();
+}
+catch(\Exception $e){
+    echo str_replace(['{{error_summary}}', '{{error_message}}'], ["Exception Caught", $e->getMessage()], file_get_contents($_BENV['BAKERY_PATH']."Pantry/Views/500.html"));
+}
 // Enjoi
